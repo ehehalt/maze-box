@@ -80,7 +80,7 @@ func (b *Block) Collide(c tl.Physical) {
 }
 
 func buildLevel(g *tl.Game, w, h, score int) {
-	maze := generateMaze()
+	maze := generateMaze(w, h)
 	l := tl.NewBaseLevel(tl.Cell{})
 	g.Screen().SetLevel(l)
 	scoretext := tl.NewText(0, 1, "Levels explored: "+strconv.Itoa(score), tl.ColorBlue, tl.ColorBlack)
