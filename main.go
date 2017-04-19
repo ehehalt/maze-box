@@ -4,13 +4,15 @@ import (
 	"strconv"
 
 	tl "github.com/JoelOtter/termloop"
+	maze "github.com/ehehalt/maze"
 )
 
 // Maze
 
-func generateMaze(w, h int) [][]rune {
-	maze := make([][]rune, w)
-	return maze
+func generateMaze(width, height int) [][]rune {
+	grid := maze.NewGrid(width, height)
+	maze := maze.Wilson(*grid)
+	return maze.ToRunes()
 }
 
 // Block (based on the termloop pyramid sample)
@@ -102,19 +104,6 @@ func buildLevel(g *tl.Game, w, h, score int) {
 
 func main() {
 	game := tl.NewGame()
-
-	screen := game.Screen()
-
-	screen.AddEntity(tl.NewText(0, 0, "Maze-Box!", tl.ColorRed, tl.ColorBlack))
-
-	cell := tl.Cell{
-		Bg: tl.ColorBlack,
-		Fg: tl.ColorBlack,
-		Ch: ' ',
-	}
-
-	level := tl.NewBaseLevel(cell)
-	screen.SetLevel(level)
-
+	buildLevel(game, 40, 10, 0)
 	game.Start()
 }
